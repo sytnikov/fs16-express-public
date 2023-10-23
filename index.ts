@@ -1,6 +1,6 @@
 import express from "express"
 
-import booksRoute from "./routes/books";
+import productsRoute from "./routes/products";
 import categoriesRoute from "./routes/categories";
 import usersRoute from "./routes/users";
 import authorsRoute from "./routes/authors"
@@ -15,7 +15,7 @@ app.get("/hello", loggingMiddleware, (req, res) => {
   res.json({ msg: "hello, from Express.js!" })
 })
 
-app.use("/books", booksRoute);
+app.use("/products", productsRoute);
 app.use("/categories", categoriesRoute);
 app.use("/users", usersRoute);
 app.use("/authors", authorsRoute);

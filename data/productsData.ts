@@ -1,10 +1,11 @@
-import { Book } from "../types/Book";
+import { Product } from "../types/Product";
 
-export const booksData: Book[] = [
+export const productsData: Product[] = [
   {
     id: 1,
     name: "Book 1",
     price: 122,
+    description: "some text",
     author: {
       id: 1,
       name: "Koster",
@@ -20,6 +21,7 @@ export const booksData: Book[] = [
     id: 2,
     name: "Book 2",
     price: 333,
+    description: "some text",
     author: {
       id: 2,
       name: "Adoum",
@@ -34,6 +36,7 @@ export const booksData: Book[] = [
   {
     id: 3,
     name: "Book 3",
+    description: "some text",
     price: 432,
     author: {
       id: 3,

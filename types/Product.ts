@@ -1,10 +1,11 @@
 import { Author } from "./Author";
 import { Category } from "./Category";
 
-export interface Book {
+export interface Product {
   id: number;
   name: string;
+  description: string;
   price: number;
-  author: Author
+  author: Author;
   category: Category;
 }
