@@ -3,7 +3,6 @@ import express from "express"
 import productsRoute from "./routes/products";
 import categoriesRoute from "./routes/categories";
 import usersRoute from "./routes/users";
-import authorsRoute from "./routes/authors"
 import { loggingMiddleware } from "./middlewares/logging"
 import { errorLoggingMiddleware } from "./middlewares/error"
 
@@ -18,7 +17,6 @@ app.get("/hello", loggingMiddleware, (req, res) => {
 app.use("/products", productsRoute);
 app.use("/categories", categoriesRoute);
 app.use("/users", usersRoute);
-app.use("/authors", authorsRoute);
 
 app.use(errorLoggingMiddleware)
 app.listen(PORT, () => {
