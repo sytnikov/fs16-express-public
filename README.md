@@ -1,5 +1,12 @@
 # ExpressJS
 
+## Back-end Group 1 aka Squad 1
+
+- Shtanko Yaroslav
+- Md Shayemur Rahman
+- Amjad Shakhshir
+- Alexey Sytnikov
+
 ## Basic CRUD Operations
 
 **Books OR Products:**
