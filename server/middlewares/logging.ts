@@ -1,12 +1,19 @@
 import { Request, Response, NextFunction } from "express";
 
-export function loggingMiddleware(
+export const loggingMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
-) {
-  if (req.path) {
-    console.log("👀 [INFO]: ", req.method, req.path);
-    next();
-  }
-}
+) => {
+  res.on("finish", () => {
+    console.log(
+      "👀 [INFO]: ",
+      req.method,
+      decodeURI(req.url),
+      res.statusCode,
+      res.statusMessage
+    );
+  });
+  next();
+};
+

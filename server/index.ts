@@ -1,18 +1,18 @@
 import express from "express";
 
+import productsRoute from "./routes/products";
 import { loggingMiddleware } from "./middlewares/logging";
-import { errorloggingMiddleware } from "./middlewares/errorLogging";
+import { apiErrorHandler } from "./middlewares/error";
 import { categoriesRouter } from "./routes/categoriesRouter";
 
-const PORT = 8009;
+const PORT = 8080;
 const app = express();
+app.use(express.json());
 
-app.get("/hello", loggingMiddleware, (req, res) => {
-  res.json({ msg: "This server is created with Express.js" });
-});
+app.use("/products", loggingMiddleware, productsRoute);
+app.use("/categories", loggingMiddleware, categoriesRouter);
 
-app.use("/categories", categoriesRouter);
-app.use(errorloggingMiddleware);
+app.use(apiErrorHandler);
 app.listen(PORT, () => {
   console.log(`👀 Server is running on localhost:${PORT}`);
 });
