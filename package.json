@@ -5,8 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch ./index.ts "
+    "server": "npx tsx watch ./server/index.ts"
   },
   "keywords": [],
   "author": "",
