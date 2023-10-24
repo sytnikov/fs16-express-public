@@ -1,14 +1,15 @@
-import express from "express"
+import express from "express";
 
-import { categoriesData } from "../data/categoriesData"
+import { getAllCategories } from "../controllers/categories/getAllCategories";
+import { getSingleCategory } from "../controllers/categories/getSingleCategory";
+import { deleteCategory } from "../controllers/categories/deleteCategory";
+import { createCategory } from "../controllers/categories/createCategory";
+import { updateCategory } from "../controllers/categories/updateCategory";
 
-export const categoriesRouter = express.Router()
+export const categoriesRouter = express.Router();
 
-categoriesRouter.get("/", (_, res) => {
-  res.json({ categoriesData })
-})
-
-categoriesRouter.get("/:categoryId", (req, res) => {
-  const id = req.params.categoryId
-  res.json({categoriesData: categoriesData[Number(id)-1]})
-} )
+categoriesRouter.get("/", getAllCategories);
+categoriesRouter.get("/:categoryId", getSingleCategory);
+categoriesRouter.post("/", createCategory)
+categoriesRouter.put("/:categoryId", updateCategory)
+categoriesRouter.delete("/:categoryId", deleteCategory)

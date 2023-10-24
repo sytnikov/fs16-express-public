@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { productsData } from "../../data/productsData";
-import { ApiError } from "../../middlewares/errors/apiErrorHandler";
+import { ApiError } from "../../middlewares/errors/ApiError";
 
 export const getAllProducts = (
   req: Request,
