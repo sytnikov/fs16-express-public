@@ -4,7 +4,7 @@ import { usersData } from "../../data/usersData";
 import { ApiError } from "../../middlewares/errors/ApiError";
 import { User } from "../../types/User";
 
-export function createCategory(
+export function createUser(
     req: Request,
     res: Response,
     next: NextFunction
