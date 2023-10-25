@@ -1,18 +1,16 @@
 import express from 'express';
 
-import productsRoute from './routes/products';
-import { loggingMiddleware } from './middlewares/logging';
-import { apiErrorHandler } from './middlewares/error';
-import { categoriesRouter } from './routes/categoriesRouter';
-import ordersRouter from './routes/ordersRouter';
+import productsRouter from "./routes/productsRouter";
+import { loggingMiddleware } from "./middlewares/logging";
+import { apiErrorHandler } from "./middlewares/apiErrorHandler";
+import { categoriesRouter } from "./routes/categoriesRouter";
 
 const PORT = 8080;
 const app = express();
 app.use(express.json());
 
-app.use('/products', loggingMiddleware, productsRoute);
-app.use('/categories', loggingMiddleware, categoriesRouter);
-app.use('/orders', loggingMiddleware, ordersRouter);
+app.use("/products", loggingMiddleware, productsRouter);
+app.use("/categories", loggingMiddleware, categoriesRouter);
 
 app.use(apiErrorHandler);
 app.listen(PORT, () => {

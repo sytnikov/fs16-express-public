@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { productSchema } from "../schemas/productSchema";
-import { ApiError } from "./errors/apiErrorHandler";
+import { ApiError } from "./errors/ApiError";
 
 export const validateProduct = (
   req: Request,
