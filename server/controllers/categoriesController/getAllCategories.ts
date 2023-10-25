@@ -1,16 +1,19 @@
 import { NextFunction, Request, Response } from "express";
 
-import { categoriesData } from "../../data/categoriesData";
 import { ApiError } from "../../middlewares/errors/ApiError";
+import categoriesService from "../../services/categoriesService";
 
 export function getAllCategories(
-  req: Request,
+  _: Request,
   res: Response,
   next: NextFunction
 ) {
-  if (categoriesData) {
-    res.status(200).json(categoriesData);
+  
+  const categories = categoriesService.getAll()
+  if (categories) {
+    res.status(200).json(categories)
     return
   }
+  
   next(ApiError.resourceNotFound("Categories data not found"));
 }

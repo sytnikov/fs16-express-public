@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 
-import { categoriesData } from "../../data/categoriesData";
 import { ApiError } from "../../middlewares/errors/ApiError";
+import categoriesService from "../../services/categoriesService";
 
 export function getSingleCategory (req: Request, res: Response, next: NextFunction) { 
   const id = Number(req.params.categoryId)
-  const categoryData = categoriesData[id-1]
-  if (!categoryData) {
-    next(ApiError.resourceNotFound("The category id is not in the system"))
+  const category = categoriesService.getSingle(id)
+  if (!category) {
+    next(ApiError.resourceNotFound("Category not found"))
     return
   }
-  res.status(200).json(categoryData)
+  res.status(200).json(category)
 } 

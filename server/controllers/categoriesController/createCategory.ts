@@ -2,20 +2,22 @@ import { NextFunction, Request, Response } from "express";
 
 import { categoriesData } from "../../data/categoriesData";
 import { ApiError } from "../../middlewares/errors/ApiError";
+import categoriesService from "../../services/categoriesService";
 
 export function createCategory(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  const newCategory = req.body;
-  const nameExist = categoriesData.findIndex(
-    (cat) => cat.name.toLowerCase() === newCategory.name.toLowerCase()
-  );
-  if (nameExist === -1) {
-    // need to add validation
-    newCategory.id = categoriesData.length + 1;
-    categoriesData.push(newCategory);
+  const newCategoryData = req.body;
+  const categoryName = categoriesService
+    .getAll()
+    .find(
+      (cat) => cat.name.toLowerCase() === newCategoryData.name.toLowerCase()
+    );
+  if (!categoryName) {
+    newCategoryData.id = categoriesService.getAll().length + 1;
+    const newCategory = categoriesService.createCategory(newCategoryData);
     res.status(201).json(newCategory);
     return;
   }
