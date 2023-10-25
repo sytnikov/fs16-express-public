@@ -16,4 +16,5 @@ export function deleteUser(
     }
     usersData.splice(userIndex, 1);
     res.status(204).send();
+    res.json("User deleted successfully");
 }

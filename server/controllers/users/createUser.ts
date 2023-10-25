@@ -59,6 +59,7 @@ export function createUser(
     if (emailExists === -1) {
         usersData.push(newUser);
         res.status(201).json(newUser);
+        res.json("User created successfully");
         return;
     }
     next(ApiError.badRequest("The user with this email already exists"));
