@@ -4,13 +4,19 @@ import productsRouter from "./routes/productsRouter";
 import { loggingMiddleware } from "./middlewares/logging";
 import { apiErrorHandler } from "./middlewares/apiErrorHandler";
 import { categoriesRouter } from "./routes/categoriesRouter";
+import { usersRouter } from "./routes/usersRouter";
 
 const PORT = 8080;
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 app.use("/products", loggingMiddleware, productsRouter);
 app.use("/categories", loggingMiddleware, categoriesRouter);
+app.use("/users", loggingMiddleware, usersRouter);
 
 app.use(apiErrorHandler);
 app.listen(PORT, () => {
