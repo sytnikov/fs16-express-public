@@ -2,14 +2,13 @@ import { NextFunction, Request, Response } from "express";
 
 import { categoriesData } from "../../data/categoriesData";
 import { ApiError } from "../../middlewares/errors/ApiError";
-import { Category } from "../../types/Category";
 
 export function createCategory(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  const newCategory: Category = req.body;
+  const newCategory = req.body;
   const nameExist = categoriesData.findIndex(
     (cat) => cat.name.toLowerCase() === newCategory.name.toLowerCase()
   );

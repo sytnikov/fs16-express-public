@@ -5,8 +5,10 @@ import { ApiError } from "../../middlewares/errors/ApiError";
 
 export function getSingleCategory (req: Request, res: Response, next: NextFunction) { 
   const id = Number(req.params.categoryId)
-  if (id) {
-    res.status(200).json({categoryData: categoriesData[id-1]})
+  const categoryData = categoriesData[id-1]
+  if (!categoryData) {
+    next(ApiError.resourceNotFound("The category id is not in the system"))
+    return
   }
-  next(ApiError.resourceNotFound("The category not found, consider another category id"))
+  res.status(200).json(categoryData)
 } 
