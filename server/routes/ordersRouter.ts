@@ -10,7 +10,7 @@ const ordersRouter = Router();
 ordersRouter.get('/', getAllOrders);
 ordersRouter.get('/:id', getSingleOrder);
 ordersRouter.post('/', addOrder);
-ordersRouter.put('/', editOrder);
+ordersRouter.patch('/:id', editOrder);
 ordersRouter.delete('/:id', deleteOrder);
 
 export default ordersRouter;

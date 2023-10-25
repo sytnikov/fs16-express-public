@@ -2,7 +2,7 @@ import { Order } from '../types/Order';
 
 export const ordersData: Order[] = [
   {
-    id: 3,
+    id: 1,
     products: [
       {
         productId: 1,
@@ -11,7 +11,7 @@ export const ordersData: Order[] = [
     ],
   },
   {
-    id: 23,
+    id: 2,
     products: [
       {
         productId: 2,
