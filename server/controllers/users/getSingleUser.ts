@@ -8,8 +8,9 @@ export function getSingleUser(
     res: Response,
     next: NextFunction
     ) {
-    const { id } = req.params;
-    const user = usersData.find((user) => user.id === Number(id));
+    const id = Number(req.params.userId);
+    const user = usersData.find((user) => user.id === id);
+    console.log(user, id);
     if (user) {
         res.status(200).json(user);
         return;
