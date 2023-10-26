@@ -1,12 +1,14 @@
 import express from "express";
 
 import controller from "../controllers/categoriesController"
+import { validate } from "../middlewares/validate";
+import { categorySchema } from "../schemas/categorySchema";
 
 const categoriesRouter = express.Router();
 
 categoriesRouter.get("/", controller.getAllCategories);
 categoriesRouter.get("/:categoryId", controller.getSingleCategory);
-categoriesRouter.post("/", controller.createCategory)
+categoriesRouter.post("/", validate(categorySchema), controller.createCategory)
 categoriesRouter.put("/:categoryId", controller.updateCategory)
 categoriesRouter.delete("/:categoryId", controller.deleteCategory)
 
