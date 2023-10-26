@@ -1,17 +1,17 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { usersData } from '../../data/usersData';
 import { ApiError } from '../../middlewares/errors/ApiError';
+import usersService from '../../services/usersService';
 
 export function getAllUsers(
     req: Request,
     res: Response,
     next: NextFunction
     ) {
-        if (usersData) {
-            res.status(200).json(usersData);
+        const users = usersService.getAllUsers();
+        if (users.length > 0) {
+            res.status(200).json(users);
             return;
-        } else {
-            next(ApiError.resourceNotFound("Users data not found"));
         }
+        next(ApiError.resourceNotFound("Users can't be fetched"));
 }

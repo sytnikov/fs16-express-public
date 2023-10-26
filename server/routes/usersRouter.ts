@@ -1,5 +1,8 @@
-import express from "express";
+import { usersController } from '../controllers/users';
+import { validate } from '../middlewares/validate';
+import { userSchema } from '../schemas/userSchema';
 
+const usersRouter = express.Router();
 
 import { getSingleUser } from "../controllers/users/getSingleUser";
 import { deleteUser } from "../controllers/users/deleteUser";
@@ -7,10 +10,10 @@ import { createUser } from "../controllers/users/createUser";
 import { updateUser } from "../controllers/users/updateUser";
 import { getAllUsers } from "../controllers/users/getAllUsers";
 
-export const usersRouter = express.Router();
+usersRouter.get('/', usersController.getAllUsers);
+usersRouter.get('/:userId', usersController.getSingleUser);
+usersRouter.post('/', validate(userSchema), usersController.createUser);
+usersRouter.put('/:userId', usersController.updateUser);
+usersRouter.delete('/:userId', usersController.deleteUser);
 
-usersRouter.get("/", getAllUsers);
-usersRouter.get("/:userId", getSingleUser);
-usersRouter.post("/", createUser)
-usersRouter.put("/:userId", updateUser)
-usersRouter.delete("/:userId", deleteUser)
+export default usersRouter;
