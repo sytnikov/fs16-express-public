@@ -68,9 +68,12 @@ export class ProductRepo {
   updateProduct(updatedProduct: Product, id: number) {
     const indexProduct = this.products.findIndex((i) => i.id === id);
     if (indexProduct !== -1) {
-      this.products[indexProduct] = updatedProduct;
-      updatedProduct.id = id;
-      return updatedProduct;
+      this.products[indexProduct] = {
+        ...this.products[indexProduct],
+        ...updatedProduct,
+        id,
+      };
+      return this.products[indexProduct];
     }
     return false;
   }
