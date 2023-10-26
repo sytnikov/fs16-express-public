@@ -2,7 +2,13 @@ import { usersController } from '../controllers/users';
 import { validate } from '../middlewares/validate';
 import { userSchema } from '../schemas/userSchema';
 
-const usersRouter = require('express').Router();
+const usersRouter = express.Router();
+
+import { getSingleUser } from "../controllers/users/getSingleUser";
+import { deleteUser } from "../controllers/users/deleteUser";
+import { createUser } from "../controllers/users/createUser";
+import { updateUser } from "../controllers/users/updateUser";
+import { getAllUsers } from "../controllers/users/getAllUsers";
 
 usersRouter.get('/', usersController.getAllUsers);
 usersRouter.get('/:userId', usersController.getSingleUser);
