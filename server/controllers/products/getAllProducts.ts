@@ -1,14 +1,16 @@
 import { NextFunction, Request, Response } from "express";
-import { productsData } from "../../data/productsData";
+
+import services from "../../services/productsService";
 import { ApiError } from "../../middlewares/errors/ApiError";
 
 export const getAllProducts = (
-  req: Request,
+  _: Request,
   res: Response,
   next: NextFunction
 ) => {
-  if (productsData) {
-    res.status(200).json(productsData);
+  const products = services.findAll();
+  if (products) {
+    res.status(200).json(products);
     return;
   }
   next(ApiError.resourceNotFound("Products data not found"));
