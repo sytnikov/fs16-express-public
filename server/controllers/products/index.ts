@@ -1,5 +1,13 @@
-import { addProduct } from "./addProduct.js";
-import { deleteProduct } from "./deleteProduct.js";
-import { getAllProducts } from "./getAllProducts.js";
+import { addProduct } from "./addProduct";
+import { deleteProduct } from "./deleteProduct";
+import { getAllProducts } from "./getAllProducts";
+import { updateProduct } from "./updateProduct";
+import { getProduct } from "./getProduct";
 
-export default { addProduct, deleteProduct, getAllProducts };
+export default {
+  addProduct,
+  deleteProduct,
+  getAllProducts,
+  updateProduct,
+  getProduct,
+};
