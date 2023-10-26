@@ -1,17 +1,22 @@
 import { Request, Response, NextFunction } from "express";
-import { productSchema } from "../schemas/productSchema";
-import { ApiError } from "./errors/ApiError";
+import { uptadeProductSchema, productSchema } from "../schemas/productSchema";
 
-export const validateProduct = (
+export const validateProduct = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const newProduct = req.body;
-  const { error } = productSchema.validate(newProduct);
-  if (error) {
-    next(ApiError.badRequest(error.details[0].message));
-    return;
+  try {
+    req.method === "POST"
+      ? await productSchema.parseAsync({
+          body: req.body,
+          query: req.query,
+          params: req.params,
+        })
+      : await uptadeProductSchema.parseAsync(req.body);
+
+    return next();
+  } catch (error) {
+    return res.status(400).json(error);
   }
-  next();
 };
