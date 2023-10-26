@@ -1,5 +1,6 @@
 import { CategoryRepo } from "../models/CategoryModel";
-import { Category } from "../types/Category";
+import { CreateCategoryInput } from "../types/CreateCategoryInput";
+import { UpdateCategoryInput } from "../types/UpdateCategoryInput";
 
 const categoriesRepo = new CategoryRepo();
 
@@ -13,24 +14,30 @@ function getSingle(categoryId: number) {
   return category;
 }
 
-function createCategory(category: Category) {
-  const newCategory = categoriesRepo.createCategory(category);
+function getSingleByName(categoryName: string) {
+  const category = categoriesRepo.getSingleByName(categoryName);
+  return category;
+}
+
+function createCategory(createData: CreateCategoryInput) {
+  const newCategory = categoriesRepo.createCategory(createData);
   return newCategory;
 }
 
-function updateCategory(index: number, category: Category) {
-  const updatedCategory = categoriesRepo.updateCategory(index, category)
+function updateCategory(id: number, updateData: UpdateCategoryInput) {
+  const updatedCategory = categoriesRepo.updateCategory(id, updateData)
   return updatedCategory
 }
 
-function deleteCategory(index: number) {
-  categoriesRepo.deleteCategory(index)
-  return
+function deleteCategory(id: number) {
+  const foundIndex = categoriesRepo.deleteCategory(id)
+  return foundIndex
 }
   
 export default {
   getAll,
   getSingle,
+  getSingleByName,
   createCategory,
   updateCategory,
   deleteCategory
