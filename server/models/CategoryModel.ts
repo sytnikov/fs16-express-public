@@ -66,7 +66,10 @@ export class CategoryRepo {
 
   deleteCategory(id: number) {
     const foundIndex = this.categories.findIndex(cat => cat.id === id)
-    this.categories.splice(foundIndex, 1)
+    if (foundIndex !== -1) {
+      this.categories.splice(foundIndex, 1)
+      return foundIndex
+    }
     return foundIndex
   }
 }
