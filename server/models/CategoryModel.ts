@@ -1,4 +1,6 @@
 import { Category } from "../types/Category";
+import { CreateCategoryInput } from "../types/CreateCategoryInput";
+import { UpdateCategoryInput } from "../types/UpdateCategoryInput";
 
 export class CategoryRepo {
   categories = [
@@ -33,18 +35,38 @@ export class CategoryRepo {
     return category
   }
 
-  createCategory(newCategory: Category) {
+  getSingleByName(categoryName: string) {
+    const category = this.categories.find(cat => cat.name === categoryName)
+    return category
+  }
+
+  createCategory(createData: CreateCategoryInput) {
+    const id = this.categories.length + 1;
+    const newCategory: Category = {
+      id: id,
+      name: createData.name,
+      images: createData.images
+    }
     this.categories.push(newCategory)
     return newCategory
   }
 
-  updateCategory(index: number, updatedCategory: Category) {
-    this.categories.splice(index, 1, updatedCategory)
-    return updatedCategory
+  updateCategory(id: number, updateData: UpdateCategoryInput) {
+    const foundIndex = this.categories.findIndex((cat) => cat.id === id);
+    if (foundIndex !== -1) {
+      const updatedCategory = {
+        ...this.categories[foundIndex],
+        ...updateData
+      }
+      this.categories.splice(foundIndex, 1, updatedCategory)
+      return updatedCategory
+    }
+    return false
   }
 
-  deleteCategory(index: number) {
-    this.categories.splice(index, 1)
-    return this.categories
+  deleteCategory(id: number) {
+    const foundIndex = this.categories.findIndex(cat => cat.id === id)
+    this.categories.splice(foundIndex, 1)
+    return foundIndex
   }
 }

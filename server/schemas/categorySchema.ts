@@ -7,12 +7,12 @@ export const categorySchema = z.object({
     }),
     images: z
       .string({
-        required_error: "There should be at least one image category",
+        required_error: "Should be at least one category image",
       })
       .array()
       .nonempty({
         message: "Category image collection can't be empty",
       })
-      .max(3),
+      .max(3)
   }),
 });

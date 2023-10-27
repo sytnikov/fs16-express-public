@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 
 import { ApiError } from "../../middlewares/errors/ApiError";
 import categoriesService from "../../services/categoriesService";
+import { UpdateCategoryInput } from "../../types/UpdateCategoryInput";
 
 export function updateCategory(
   req: Request,
@@ -9,22 +10,11 @@ export function updateCategory(
   next: NextFunction
 ) {
   const id = Number(req.params.categoryId);
-  const categoriesData = categoriesService.getAll();
-  const category = categoriesData.find((cat) => cat.id === id);
-  if (category) {
-    const { name, images } = req.body;
-    const updatedCategoryData = {
-      id: id,
-      name: name || category.name,
-      images: images || category.images,
-    };
-    const foundIndex = categoriesData.findIndex((cat) => cat.id === id);
-    const updatedCategory = categoriesService.updateCategory(
-      foundIndex,
-      updatedCategoryData
-    );
-    res.status(200).json(updatedCategory);
+  const updateData = req.body
+  const updatedCategory = categoriesService.updateCategory(id, updateData)
+  if (!updatedCategory) {
+    next(ApiError.badRequest("Category not updated"));
     return;
   }
-  next(ApiError.resourceNotFound("The category not found"));
+  res.status(200).json(updatedCategory);
 }
