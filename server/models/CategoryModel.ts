@@ -1,6 +1,4 @@
-import { Category } from "../types/Category";
-import { CreateCategoryInput } from "../types/CreateCategoryInput";
-import { UpdateCategoryInput } from "../types/UpdateCategoryInput";
+import { Category, CreateCategoryInput, UpdateCategoryInput } from "../types/Category";
 
 export class CategoryRepo {
   categories = [
