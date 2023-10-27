@@ -1,5 +1,6 @@
 import { CreateProductInput } from "../types/CreateProductInput";
 import { Product } from "../types/Product";
+import { UpdateProductInput } from "../types/UpdateProductInput";
 import { CategoryRepo } from "./CategoryModel";
 
 export class ProductRepo {
@@ -65,7 +66,7 @@ export class ProductRepo {
     return false;
   }
 
-  updateProduct(updatedProduct: Product, id: number) {
+  updateProduct(updatedProduct: UpdateProductInput, id: number) {
     const indexProduct = this.products.findIndex((i) => i.id === id);
     if (indexProduct !== -1) {
       this.products[indexProduct] = {
