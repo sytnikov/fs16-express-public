@@ -1,6 +1,4 @@
-import { Category } from "../types/Category";
-import { CreateCategoryInput } from "../types/CreateCategoryInput";
-import { UpdateCategoryInput } from "../types/UpdateCategoryInput";
+import { Category, CreateCategoryInput, UpdateCategoryInput } from "../types/Category";
 
 export class CategoryRepo {
   categories = [
@@ -66,7 +64,10 @@ export class CategoryRepo {
 
   deleteCategory(id: number) {
     const foundIndex = this.categories.findIndex(cat => cat.id === id)
-    this.categories.splice(foundIndex, 1)
+    if (foundIndex !== -1) {
+      this.categories.splice(foundIndex, 1)
+      return foundIndex
+    }
     return foundIndex
   }
 }
