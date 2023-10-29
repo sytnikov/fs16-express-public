@@ -9,9 +9,8 @@ export function getAllUsers(
     next: NextFunction
     ) {
         const users = usersService.getAllUsers();
-        if (users.length > 0) {
-            res.status(200).json(users);
-            return;
+        if (users.length < 0) {
+            next(ApiError.resourceNotFound("Users can't be fetched"));
         }
-        next(ApiError.resourceNotFound("Users can't be fetched"));
+        res.status(200).json({ users });
 }

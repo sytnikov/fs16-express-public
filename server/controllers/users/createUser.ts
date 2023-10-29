@@ -10,11 +10,9 @@ export function createUser(
     ) {
         const newUserData = req.body;
         const user = usersService.getSingleUser(newUserData.id);
-        if (!user) {
-            newUserData.id = usersService.getAllUsers().length + 1;
-            const newUser = usersService.createUser(newUserData);
-            res.status(201).json(newUser);
-            return;
+        if (user) {
+            next(ApiError.badRequest("The user with this id already exists"));
         }
-        next(ApiError.badRequest("The user with this id already exists"));
+        usersService.createUser(newUserData);
+        res.status(201).json({ message: "User created" });
 }
