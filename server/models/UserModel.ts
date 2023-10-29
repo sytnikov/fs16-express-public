@@ -1,4 +1,4 @@
-import { User } from "../types/User";
+import { User, UserUpdate } from "../types/User";
 
 export class UserRepo{
     users = [
@@ -39,9 +39,11 @@ export class UserRepo{
         return newUser
     }
 
-    updateUser(index: number, updatedUser: User){
-        this.users.splice(index, 1, updatedUser)
-        return updatedUser
+    updateUser(index: number, updatedUser:  UserUpdate){
+        const user = this.users[index]
+        const updatedUserObj = {...user, ...updatedUser}
+        this.users[index] = updatedUserObj
+        return updatedUserObj
     }
 
     deleteUser(index: number){
