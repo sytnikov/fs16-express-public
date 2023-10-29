@@ -1,7 +1,7 @@
 import express from "express";
 
 import controller from "../controllers/categoriesController"
-import { validate } from "../middlewares/validate";
+import { validate } from "../middlewares/validateUser";
 import { categorySchema } from "../schemas/categorySchema";
 
 const categoriesRouter = express.Router();

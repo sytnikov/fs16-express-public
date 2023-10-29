@@ -1,7 +1,7 @@
 import express from "express";
 
 import ctrl from "../controllers/products";
-import { validate } from "../middlewares/validate";
+import { validate } from "../middlewares/validateUser";
 import { productSchema, uptadeProductSchema } from "../schemas/productSchema";
 
 const router = express.Router();
