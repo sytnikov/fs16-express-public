@@ -10,10 +10,9 @@ export function getAllCategories(
 ) {
   
   const categories = categoriesService.getAll()
-  if (categories) {
-    res.status(200).json(categories)
+  if (categories.length <= 0) {
+    next(ApiError.resourceNotFound("Categories data not found"));
     return
   }
-  
-  next(ApiError.resourceNotFound("Categories data not found"));
+  res.status(200).json(categories)
 }
