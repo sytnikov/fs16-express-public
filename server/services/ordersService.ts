@@ -1,48 +1,37 @@
-import { ordersData } from '../data/ordersData';
-import { productsData } from '../data/productsData';
 import { Order } from '../types/Order';
+import { OrderRepo } from '../models/OrderModel';
 
-export function getAll() {
-  return ordersData;
+const ordersRepo = new OrderRepo();
+
+function getOrders() {
+  const orders = ordersRepo.getAll();
+  return orders;
 }
 
-export function getSingle(orderId: number) {
-  const order = ordersData.find((order) => order.id === orderId);
+function getSingleOrder(orderId: number) {
+  const order = ordersRepo.getSingle(orderId);
   return order;
 }
 
-export function createOne(newOrder: Order) {
-  const order = ordersData.find((order) => order.id === newOrder.id);
-
-  if (!order) {
-    newOrder.id = ordersData.length + 1;
-    ordersData.push(newOrder);
-    return newOrder;
-  }
-  return null;
+function createOrder(createData: Order) {
+  const newOrder = ordersRepo.createOrder(createData);
+  return newOrder;
 }
 
-export function removeOne(orderId: number) {
-  const existed = ordersData.findIndex((order) => order.id === orderId);
-
-  if (existed) {
-    ordersData.splice(existed, 1);
-  }
-  return null;
+function removeOrder(orderId: number) {
+  const foundIndex = ordersRepo.deleteOrder(orderId);
+  return foundIndex;
 }
 
-export function updateOne(orderId: number, updatedOrder: Order) {
-  const existingOrderIndex = ordersData.findIndex(
-    (order) => order.id === orderId
-  );
-
-  if (existingOrderIndex === -1) {
-    return null;
-  }
-  // const updated = { ...ordersData[existingOrderIndex], ...updatedOrder };
-  // ordersData[existingOrderIndex];
-  ordersData[existingOrderIndex] = updatedOrder;
-  updatedOrder.id = orderId;
-
-  return updatedOrder;
+function updateOrder(orderId: number, updatedOrder: Order) {
+  const foundIndex = ordersRepo.updateOrder(orderId, updatedOrder);
+  return foundIndex;
 }
+
+export default {
+  getOrders,
+  getSingleOrder,
+  createOrder,
+  removeOrder,
+  updateOrder,
+};
