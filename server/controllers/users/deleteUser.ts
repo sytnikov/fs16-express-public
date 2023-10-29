@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-import { usersData } from "../../data/usersData";
+import usersService from "../../services/usersService";
 import { ApiError } from "../../middlewares/errors/ApiError";
 
 export function deleteUser(
@@ -8,13 +8,13 @@ export function deleteUser(
     res: Response,
     next: NextFunction
     ) {
-    const { id } = req.params;
-    const userIndex = usersData.findIndex((user) => user.id === Number(id));
-    if (userIndex === -1) {
-        next(ApiError.resourceNotFound("User not found"));
-        return;
-    }
-    usersData.splice(userIndex, 1);
-    res.status(204).send();
-    res.json("User deleted successfully");
+        const id = Number(req.params.userId);
+        const usersData = usersService.getSingleUser(id);
+        if (usersData) {
+            usersService.deleteUser(id);
+            res.status(200).json(usersData);
+            return;
+        }
+        next(ApiError.resourceNotFound("User can't be deleted"));
 }
+
