@@ -13,5 +13,5 @@ export const apiErrorHandler = (
     return;
   }
   res.status(500).json({ message: "Something went wrong" });
-  monitorRequest(req, res, next, true)
+  monitorRequest(req, res, next, true);
 };

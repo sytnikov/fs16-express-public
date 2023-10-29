@@ -1,6 +1,5 @@
 import { Product } from "./Product";
 
-export interface CreateProductInput extends Omit<Product, "id"> {
+export interface CreateProductInput extends Product {
   categoryId?: number;
-  id: number; 
 }
