@@ -33,4 +33,3 @@ export const uptadeProductSchema = z
       images: z.array(z.string()).optional(),
     }).strict(),
   })
-
