@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from "express";
 
 import { ApiError } from "../../middlewares/errors/ApiError";
 import categoriesService from "../../services/categoriesService";
-import { UpdateCategoryInput } from "../../types/UpdateCategoryInput";
 
 export function updateCategory(
   req: Request,
@@ -10,8 +9,8 @@ export function updateCategory(
   next: NextFunction
 ) {
   const id = Number(req.params.categoryId);
-  const updateData = req.body
-  const updatedCategory = categoriesService.updateCategory(id, updateData)
+  const updateData = req.body;
+  const updatedCategory = categoriesService.updateCategory(id, updateData);
   if (!updatedCategory) {
     next(ApiError.badRequest("Category not updated"));
     return;
