@@ -39,11 +39,9 @@ export class UserRepo{
         return newUser
     }
 
-    updateUser(index: number, updatedUser:  UserUpdate){
-        const user = this.users[index]
-        const updatedUserObj = {...user, ...updatedUser}
-        this.users[index] = updatedUserObj
-        return updatedUserObj
+    updateUser(index: number, updatedUser:  User){
+        this.users[index] = updatedUser
+        return updatedUser
     }
 
     deleteUser(index: number){
