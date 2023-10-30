@@ -8,10 +8,11 @@ export const apiErrorHandler = (
   res: Response,
   next: NextFunction
 ) => {
+  const paths = /^(\/products|\/categories|\/orders)/;
   if (error instanceof ApiError) {
     res.status(error.code).json({ message: error.message });
     return;
   }
   res.status(500).json({ message: "Something went wrong" });
-  monitorRequest(req, res, next, true);
+  if (!paths.test(req.originalUrl)) monitorRequest(req, res, next, true);
 };
