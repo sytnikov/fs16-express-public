@@ -10,9 +10,8 @@ export function getSingleUser(
     ) {
         const id = Number(req.params.userId);
         const user = usersService.getSingleUser(id);
-        if (user) {
-            res.status(200).json(user);
-            return;
+        if (!user) {
+            next(ApiError.resourceNotFound("User not found"));
         }
-    next(ApiError.resourceNotFound("User not found"));
+        res.status(200).json({ user });
 }

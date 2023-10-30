@@ -1,5 +1,5 @@
 import { UserRepo } from "../models/UserModel";
-import { User } from "../types/User";
+import { User, UserUpdate } from "../types/User";
 
 const usersRepo = new UserRepo();
 

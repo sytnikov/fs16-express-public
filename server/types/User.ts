@@ -1,9 +1,11 @@
-export type Role = "admin" | "user";
+import { z } from "zod";
 
-export interface User {
+import { userSchema } from "../schemas/userSchema";
+
+export type UserDTO = z.infer<typeof userSchema>;
+
+export type User = UserDTO & {
     id: number;
-    name: string;
-    email: string;
-    password: string;
-    role: Role;
-}
+};
+
+export type UserUpdate = Omit<Partial<User>, "id">;
