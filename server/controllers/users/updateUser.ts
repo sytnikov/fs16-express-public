@@ -9,10 +9,11 @@ export function updateUser(
     next: NextFunction
     ) {
         const id = Number(req.params.userId);
-        const userData = req.body;
-        const updatedUser = usersService.updateUser(id, userData);
+        const updatedData = req.body;
+        const updatedUser = usersService.updateUser(id, updatedData);
         if (!updatedUser) {
             next(ApiError.resourceNotFound("User can't be updated"));
+            return;
         }
         
         res.status(200).json(updatedUser);

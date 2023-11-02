@@ -12,6 +12,7 @@ export function getSingleUser(
         const user = usersService.getSingleUser(id);
         if (!user) {
             next(ApiError.resourceNotFound("User not found"));
+            return;
         }
         res.status(200).json({ user });
 }
