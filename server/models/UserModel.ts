@@ -35,13 +35,36 @@ export class UserRepo{
     }
 
     createUser(newUser: User){
-        this.users.push(newUser)
-        return newUser
+        const id = this.users[this.users.length - 1].id + 1;
+        const existingUser = this.users.find(user => user.email === newUser.body.email);
+        if(!existingUser){
+            return null;
+        }
+        const createUser: User = {
+            body: {
+                id: id,
+                name: newUser.body.name,
+                email: newUser.body.email,
+                password: newUser.body.password,
+                role: newUser.body.role
+            }
+        }
+        this.users.push(createUser.body);
+        return createUser;
     }
 
-    updateUser(index: number, updatedUser:  User){
-        this.users[index] = updatedUser
-        return updatedUser
+    updateUser(index: number, updatedUser:  UserUpdate){
+        const foundIndex = this.users.findIndex(user => user.id === index);
+        console.log(updatedUser.body?.id)
+        if(foundIndex !== -1){
+            const updateUser = {
+                ...this.users[foundIndex],
+                ...updatedUser
+            }
+            this.users.splice(foundIndex, 1, updateUser)
+            return updateUser
+        }
+        return null
     }
 
     deleteUser(index: number){

@@ -17,7 +17,7 @@ const createUser = (user: User) => {
     return newUser;
 };
 
-const updateUser = (index: number, user: User) => {
+const updateUser = (index: number, user: UserUpdate) => {
     const updatedUser = usersRepo.updateUser(index, user)
     return updatedUser
 };
