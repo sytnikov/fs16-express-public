@@ -1,17 +1,14 @@
 import { z } from 'zod';
 
-export const userSchema = z.object({
-    id: z.number(),
-    name: z.string({
-        required_error: "Name is required",
-        invalid_type_error: "Name must be a string",
-    })
+export const userBodySchema = z.object({
+    id: z.number().default(1),
+    name: z.string()
     .min(3, { message:
         "Must be at least 3 characters long"
     })
     .max(20, { 
         message: "Must be at most 20 characters long"
-    }).regex(/^[a-zA-Z]+$/),
+    }),
     email: z.string({
         required_error: "Email is required",
     }).email(),
@@ -26,6 +23,6 @@ export const userSchema = z.object({
     role: z.enum(['admin', 'user']),
 });
 
-export const requestSchema = z.object({
-    body: userSchema,
+export const userSchema = z.object({
+    body: userBodySchema,
 });
