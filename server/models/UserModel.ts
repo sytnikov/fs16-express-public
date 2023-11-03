@@ -54,17 +54,19 @@ export class UserRepo{
     }
 
     updateUser(index: number, updatedUser:  UserUpdate){
-        const foundIndex = this.users.findIndex(user => user.id === index);
-        console.log(updatedUser.body?.id)
-        if(foundIndex !== -1){
-            const updateUser = {
-                ...this.users[foundIndex],
-                ...updatedUser
+        const indexUser = this.users.findIndex(user => user.id === index);
+        const existingUser = this.users.find(user => user.email === updatedUser.body?.email);
+        if(indexUser !== -1){
+            if (!existingUser) {
+                this.users[indexUser] = {
+                    ...this.users[indexUser],
+                    ...updatedUser,
+                    id: index
+                };
+                return this.users[indexUser];
             }
-            this.users.splice(foundIndex, 1, updateUser)
-            return updateUser
         }
-        return null
+        return false;
     }
 
     deleteUser(index: number){
