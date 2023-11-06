@@ -13,9 +13,9 @@ export const updateOrder = (
 
   const order = ordersService.updateOrder(orderId, updatedOrder);
 
-  if (order) {
-    res.status(200).json(order);
+  if (!order) {
+    next(ApiError.resourceNotFound('Order not found'));
     return;
   }
-  next(ApiError.resourceNotFound('Order not found'));
+  res.status(200).json(order);
 };

@@ -1,4 +1,4 @@
-import { Order } from '../types/Order';
+import { Order, OrderDto, UpdateOrderInput } from '../types/Order';
 
 export class OrderRepo {
   orders = [
@@ -34,22 +34,18 @@ export class OrderRepo {
     return this.orders.find((i) => i.id === id);
   }
 
-  createOrder(createData: Order) {
+  createOrder(createData: OrderDto) {
     const id = this.orders.length + 1;
     const newOrder: Order = {
       id: id,
-      products: [
-        {
-          productId: 3,
-          quantity: 1,
-        },
-      ],
+      products: createData.products
     };
     this.orders.push(newOrder);
+    return newOrder
   }
 
-  updateOrder(id: number, updateData: Order) {
-    const foundIndex = this.orders.findIndex((cat) => cat.id === id);
+  updateOrder(id: number, updateData: UpdateOrderInput) {
+    const foundIndex = this.orders.findIndex((order) => order.id === id);
     if (foundIndex !== -1) {
       const updatedOrder = {
         ...this.orders[foundIndex],

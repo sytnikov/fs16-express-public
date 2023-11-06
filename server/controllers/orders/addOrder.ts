@@ -7,8 +7,10 @@ export const addOrder = (req: Request, res: Response, next: NextFunction) => {
   const newOrder = req.body;
   const order = ordersService.createOrder(newOrder);
 
-  if (newOrder) {
-    res.status(201).json(order);
+  if (!order) {
+    next(ApiError.badRequest('Order not found'));
+    return 
   }
-  next(ApiError.resourceNotFound('Order not found'));
+  res.status(201).json(order);
+  
 };

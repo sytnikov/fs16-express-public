@@ -1,4 +1,4 @@
-import { Order } from '../types/Order';
+import { Order, OrderDto, UpdateOrderInput } from '../types/Order';
 import { OrderRepo } from '../models/OrderModel';
 
 const ordersRepo = new OrderRepo();
@@ -13,7 +13,7 @@ function getSingleOrder(orderId: number) {
   return order;
 }
 
-function createOrder(createData: Order) {
+function createOrder(createData: OrderDto) {
   const newOrder = ordersRepo.createOrder(createData);
   return newOrder;
 }
@@ -23,7 +23,7 @@ function removeOrder(orderId: number) {
   return foundIndex;
 }
 
-function updateOrder(orderId: number, updatedOrder: Order) {
+function updateOrder(orderId: number, updatedOrder: UpdateOrderInput) {
   const foundIndex = ordersRepo.updateOrder(orderId, updatedOrder);
   return foundIndex;
 }
